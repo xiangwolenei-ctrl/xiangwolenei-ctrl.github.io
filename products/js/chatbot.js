@@ -55,7 +55,7 @@
     },
     {
       k: ['contact', 'whatsapp', 'email', 'phone', 'call', 'reach', 'talk', 'human', 'agent'],
-      a: 'You can reach us 24/7: Yuan Weipeng +86 156 3918 6565 (WhatsApp), or email xiangwolenei@gmail.com. Or leave your email and question in the inquiry form below and we reply within 24 hours.'
+      a: 'You can reach us 24/7 on WhatsApp: Siyang Shen +86 135 4378 0054 and Yuan Weipeng +86 156 3918 6565, or email xiangwolenei@gmail.com. Or leave your email and question in the inquiry form below and we reply within 24 hours.'
     },
     {
       k: ['cat', 'dog', 'which', 'recommend', 'suitable', 'best seller', 'popular', 'hot'],
@@ -71,7 +71,7 @@
     }
   ];
 
-  const FALLBACK = 'Sorry, I could not find that in my knowledge base. 😅 抱歉，我暂时没有找到相关答案。请留下您的邮箱/WhatsApp（下方表单）或直接联系 Yuan Weipeng (+86 156 3918 6565)，我们会在 24 小时内回复。';
+  const FALLBACK = 'Sorry, I could not find that in my knowledge base. 😅 抱歉，我暂时没有找到相关答案。请留下您的邮箱/WhatsApp（下方表单）或直接联系 申思阳 (+86 135 4378 0054) / 原伟鹏 (+86 156 3918 6565)，我们会在 24 小时内回复。';
 
   // 中文短语 → 英文关键词（让中文提问也能命中知识库）
   const CN_MAP = [
