@@ -188,7 +188,7 @@
     this.className = 'd-zoom';
     document.body.style.overflow = '';
   });
-  // send inquiry: opens WhatsApp / email with prefilled message
+  // send inquiry: 先发邮件到我们邮箱（FormSubmit），再给客户一个 WhatsApp 的选项
   function sendInquiry() {
     const name = (document.getElementById('inqName').value || '').trim();
     const email = (document.getElementById('inqEmail').value || '').trim();
@@ -202,21 +202,28 @@
       return;
     }
     const model = "WF560- Transparent style-2.5L-";
-    const body = 'New Inquiry — ' + model + '
-Name: ' + name + '
-Email: ' + email + (wa ? '
-WhatsApp: ' + wa : '') + (qty ? '
-Qty: ' + qty : '') + '
-Message: ' + msg;
-    const saved = { t: new Date().toISOString(), model: model, name: name, email: email, wa: wa, qty: qty, msg: msg };
-    let inbox = [];
-    try { inbox = JSON.parse(localStorage.getItem('yumao_inquiries') || '[]'); } catch (e) {}
-    inbox.push(saved);
-    try { localStorage.setItem('yumao_inquiries', JSON.stringify(inbox)); } catch (e) {}
-    const url = 'https://wa.me/8613543780054?text=' + encodeURIComponent(body);
-    hint.innerHTML = '✅ Inquiry saved! Opening WhatsApp to send… (you can also email ' + email + ')';
-    hint.style.color = '#15803d';
-    window.open(url, '_blank');
+    const body = 'New Inquiry - ' + model + '\nName: ' + name + '\nEmail: ' + email + (wa ? '\nWhatsApp: ' + wa : '') + (qty ? '\nQty: ' + qty : '') + '\nMessage: ' + msg;
+    const waUrl = 'https://wa.me/8613543780054?text=' + encodeURIComponent(body);
+    hint.innerHTML = '⏳ Sending…';
+    hint.style.color = '#475569';
+    fetch('https://formsubmit.co/ajax/xiangwolenei@gmail.com', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        _subject: 'New inquiry: ' + model + ' — ' + name,
+        _template: 'table',
+        _captcha: 'false',
+        Model: model, Name: name, Email: email, WhatsApp: wa, Quantity: qty, Message: msg, Page: location.href
+      })
+    }).then(function (r) { return r.json(); }).then(function () {
+      hint.innerHTML = '✅ Thanks ' + name + ' — your inquiry reached us by email, we reply within 24 hours.'
+        + ' Prefer chat? <a href="' + waUrl + '" target="_blank" rel="noopener" style="color:#15803d;text-decoration:underline">Send it on WhatsApp</a>.';
+      hint.style.color = '#15803d';
+    }).catch(function () {
+      hint.innerHTML = '✅ Opening WhatsApp…';
+      hint.style.color = '#15803d';
+      window.open(waUrl, '_blank');
+    });
   }
 </script>
 <script src="../js/chatbot.js"></script>
