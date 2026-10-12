@@ -352,7 +352,7 @@
     try { inbox = JSON.parse(localStorage.getItem('yumao_inquiries') || '[]'); } catch (e) {}
     inbox.push({ t: new Date().toISOString(), name: name, email: email, wa: wa, msg: msg });
     try { localStorage.setItem('yumao_inquiries', JSON.stringify(inbox)); } catch (e) {}
-    const url = 'https://wa.me/8613543780054?text=' + encodeURIComponent(body);
+    const url = 'https://wa.me/8618603917825?text=' + encodeURIComponent(body);
     note.textContent = '✅ Inquiry saved! Opening WhatsApp to send to our sales team…';
     note.style.color = '#bbf7d0';
     window.open(url, '_blank');
